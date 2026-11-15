@@ -1,1 +1,46 @@
-
+*** sensores
+Algoritmo SimulacionSensores
+    Definir opcion Como Entero
+    
+    Escribir "=== EXPERIMENTOS DE SENSORES ==="
+    Escribir "1. Secuencial, con llamadas directas"
+    Escribir "2. Iniciar todos los hilos y después esperarlos (Simulado)"
+    Escribir "3. Ejecutar espera después de cada inicio"
+    Escribir "Elija el modo a ejecutar (1-3): "
+    Leer opcion
+    
+    Segun opcion Hacer
+        1:
+            Escribir "--- Modo Secuencial ---"
+            Escribir "[0.00s] Sensor A: Inicio de lectura"
+            Escribir "[1.00s] Sensor A: Fin de lectura"
+            Escribir "[1.00s] Sensor B: Inicio de lectura"
+            Escribir "[3.00s] Sensor B: Fin de lectura"
+            Escribir "[3.00s] Sensor C: Inicio de lectura"
+            Escribir "[4.50s] Sensor C: Fin de lectura"
+            Escribir "Tiempo total medido: 4.5000 s"
+            
+        2:
+            Escribir "--- Modo Paralelo (Esperar al final) ---"
+            Escribir "[0.00s] Sensor A: Inicio de lectura"
+            Escribir "[0.00s] Sensor B: Inicio de lectura"
+            Escribir "[0.00s] Sensor C: Inicio de lectura"
+            Escribir "[1.00s] Sensor A: Fin de lectura"
+            Escribir "[1.50s] Sensor C: Fin de lectura"
+            Escribir "[2.00s] Sensor B: Fin de lectura"
+            Escribir "Tiempo total medido: 2.0000 s (determinado por el más lento: B)"
+            
+        3:
+            Escribir "--- Modo Paralelo con Join inmediato ---"
+            Escribir "[0.00s] Sensor A: Inicio de lectura"
+            Escribir "[1.00s] Sensor A: Fin de lectura"
+            Escribir "[1.00s] Sensor B: Inicio de lectura"
+            Escribir "[3.00s] Sensor B: Fin de lectura"
+            Escribir "[3.00s] Sensor C: Inicio de lectura"
+            Escribir "[4.50s] Sensor C: Fin de lectura"
+            Escribir "Tiempo total medido: 4.5000 s (se comporta como secuencial)"
+            
+        De Otro Modo:
+            Escribir "Opción inválida."
+    FinSegun
+FinAlgoritmo
