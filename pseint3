@@ -1,0 +1,35 @@
+***chat
+
+
+
+Algoritmo ServidorChatLogica
+    Definir comando, usuario Como Cadena
+    Definir conexion_activa Como Logico
+    
+    Escribir "=== SIMULACIÓN LÓGICA DE SERVIDOR DE CHAT ==="
+    Escribir "Simulando conexión de un cliente..."
+    
+    usuario <- "Ana"
+    Escribir "[CONEXIÓN] ", usuario, " se ha conectado al servidor."
+    
+    conexion_activa <- Verdadero
+    
+    Mientras conexion_activa Hacer
+        Escribir "Ingrese comando o mensaje (/usuarios, /salir, o texto normal): "
+        Leer comando
+        
+        Si comando = "/usuarios" Entonces
+            Escribir "[SERVIDOR -> Ana] Usuarios conectados: Ana, Luis"
+        Sino
+            Si comando = "/salir" Entonces
+                Escribir "[DESCONEXIÓN] ", usuario, " se ha desconectado."
+                Escribir "*** ", usuario, " ha salido del chat (difundido a otros) ***"
+                conexion_activa <- Falso
+            Sino
+                Escribir "[DIFUSIÓN A OTROS CLIENTES] ", usuario, ": ", comando
+            FinSi
+        FinSi
+    FinMientras
+    
+    Escribir "Sesión de chat finalizada."
+FinAlgoritmo
