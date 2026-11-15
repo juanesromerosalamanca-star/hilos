@@ -1,1 +1,75 @@
+***inventario
 
+Algoritmo ControlInventario
+    Definir inventario, ventas_aprobadas, opcion Como Entero
+    
+    Escribir "=== TALLER DE INVENTARIO Y LOCK ==="
+    Escribir "1. Versión sin Lock (Condición de carrera)"
+    Escribir "2. Versión con Lock (Sección crítica protegida)"
+    Escribir "Seleccione la versión (1 o 2): "
+    Leer opcion
+    
+    inventario <- 1
+    ventas_aprobadas <- 0
+    
+    Segun opcion Hacer
+        1:
+            Escribir "--- PRUEBA SIN LOCK ---"
+            // Ambas cajas leen el saldo simultáneamente
+            Escribir "Caja 1 lee inventario: ", inventario
+            Escribir "Caja 2 lee inventario: ", inventario
+            
+            // Falla de concurrencia: ambas aprueban porque creyeron que había stock
+            Si inventario > 0 Entonces
+                ventas_aprobadas <- ventas_aprobadas + 1
+                inventario <- inventario - 1
+                Escribir "Caja 1: Venta APROBADA"
+            FinSi
+            
+            Si inventario > 0 Entonces
+                ventas_aprobadas <- ventas_aprobadas + 1
+                inventario <- inventario - 1
+                Escribir "Caja 2: Venta APROBADA"
+            Sino
+                Escribir "Caja 2: Venta RECHAZADA"
+            FinSi
+            
+            Escribir "[Sin Lock] Ventas aprobadas: ", ventas_aprobadas, " | Inventario final: ", inventario
+            
+        2:
+            Escribir "--- PRUEBA CON LOCK ---"
+            // Sección crítica protegida para la Caja 1
+            Escribir "[Lock Adquirido por Caja 1]"
+            Si inventario > 0 Entonces
+                inventario <- inventario - 1
+                ventas_aprobadas <- ventas_aprobadas + 1
+                Escribir "Caja 1: Venta APROBADA"
+            Sino
+                Escribir "Caja 1: Venta RECHAZADA"
+            FinSi
+            Escribir "[Lock Liberado]"
+            
+            // Sección crítica protegida para la Caja 2
+            Escribir "[Lock Adquirido por Caja 2]"
+            Si inventario > 0 Entonces
+                inventario <- inventario - 1
+                ventas_aprobadas <- ventas_aprobadas + 1
+                Escribir "Caja 2: Venta APROBADA"
+            Sino
+                Escribir "Caja 2: Venta RECHAZADA (Inventario agotado)"
+            FinSi
+            Escribir "[Lock Liberado]"
+            
+            Escribir "[Con Lock] Ventas aprobadas: ", ventas_aprobadas, " | Inventario final: ", inventario
+            
+            // Verificación con aserciones
+            Si ventas_aprobadas = 1 Y inventario = 0 Entonces
+                Escribir ">> Aserciones de verificación pasadas exitosamente."
+            Sino
+                Escribir ">> Error: Falló la consistencia del inventario."
+            FinSi
+            
+        De Otro Modo:
+            Escribir "Opción no válida."
+    FinSegun
+FinAlgoritmo  
