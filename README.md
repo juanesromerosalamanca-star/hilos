@@ -4,7 +4,7 @@
 **Integrantes:** Juan Esteban Romero Salamanca – Oscar Steven Chaves Diaz  
 **Fecha:** 13 de noviembre de 2026  
 
-## 📂 Archivos Entregados
+##  Archivos Entregados
 
 * `sensores.py`: Simulación y medición de tiempos de lectura secuencial vs. concurrente.
 * `inventario.py`: Demostración de condición de carrera (*race condition*) y su resolución mediante `Lock`.
@@ -156,7 +156,7 @@ En `cliente_chat.py`, el hilo principal queda bloqueado esperando la entrada del
 
 ---
 
-## 📌 Conclusiones
+##  Conclusiones
 
 * Los hilos permiten solapar tiempos de espera (E/S o `sleep`), reduciendo el tiempo total de ejecución de la suma de tareas al máximo individual; llamar a `join()` inmediatamente tras `start()` anula este beneficio.
 * Las condiciones de carrera ocurren cuando la lectura y actualización de un recurso compartido no son atómicas, lo cual se resuelve encapsulando ambas acciones dentro de un mismo `Lock`.
